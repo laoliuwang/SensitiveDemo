@@ -2,6 +2,7 @@ package com.cw.controller;
 
 
 import com.cw.entity.UserInfo;
+import com.cw.service.ExportService;
 import com.cw.service.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class TestController {
 
     @Autowired
     TestService testService;
+
+    @Autowired
+    private ExportService exportService;
     @Autowired
     private HttpServletRequest request;
     @Autowired
@@ -28,5 +32,11 @@ public class TestController {
     @GetMapping("/sensitive")
     public Object sensitive() throws IOException, InterruptedException {
         return UserInfo.getUserInfo();
+    }
+
+    @GetMapping("/export")
+    public Object export() throws IOException, InterruptedException {
+        this.exportService.testExport();
+        return null;
     }
 }
